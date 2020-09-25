@@ -11,12 +11,20 @@ class ComposerStaticInit301830b7749e1cbfdd5e91a668ff1f15
         array (
             'VK\\' => 3,
         ),
+        'A' => 
+        array (
+            'Asil\\VkMarket\\' => 14,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'VK\\' => 
         array (
             0 => __DIR__ . '/..' . '/vkcom/vk-php-sdk/src/VK',
+        ),
+        'Asil\\VkMarket\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/asil/vkmarket/src',
         ),
     );
 

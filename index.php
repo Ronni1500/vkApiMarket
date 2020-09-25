@@ -13,7 +13,7 @@ try {
 	$redirect_uri = 'https://oauth.vk.com/'; 
 	$display = VKOAuthDisplay::PAGE;
 	$scope = array(VKOAuthUserScope::MARKET, VKOAuthUserScope::PHOTOS, VKOAuthUserScope::GROUPS);	
-	// $state = '04955f4b04955f4b04955f4bc504e6b7760049504955f4b5bca61521fddf1408db370de';	
+	// $state = '123456';	
 
 	$browser_url = $oauth->getAuthorizeUrl(VKOAuthResponseType::CODE, $client_id, $redirect_uri, $display, $scope, $state);
 } catch(Exception $e) {
@@ -24,8 +24,8 @@ echo '<a href="' . $browser_url .'">Получить token</a><br>';
 // header('Location:' . $browser_url);
 
 if($_GET['code']){
-	$access_token = '09d41aa65f222c8c2cdf5d0bf3d4307646653b90eb4bc28ecb2fd9dfb6d145fbfd930b9f0652d046a04cf';
-	$vk = new VKApiClient('5.124');
+	$access_token = '2b1192994d3960e750bd47dbcb02e178d06cd1ad686e42f88d2b980447ae0ec85e93689831f1037bf1cf0';
+	$vk = new VKApiClient('5.101');
 
 	// try{
 	// 	echo "<pre>";
@@ -49,6 +49,7 @@ if($_GET['code']){
 				'main_photo' => 1				
 			)
 		);
+		
 		$seans = curl_init();
 		curl_setopt($seans, CURLOPT_URL, $img['upload_url']);
     	// Указываем CURL, что будем отправлять POST запрос
@@ -56,10 +57,11 @@ if($_GET['code']){
 		curl_setopt($seans, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($seans, CURLOPT_HTTPHEADER, array("Content-type: multipart/form-data"));
 		$image_path = dirname(__FILE__).'/test2.jpg';
-		$cfile = curl_file_create($image_path,'image/jpeg','test2.jpg');
+		$cfile = curl_file_create($image_path,'image/jpeg','test223.jpg');
 		curl_setopt($seans, CURLOPT_POSTFIELDS, array('file' => $cfile));
 		$vozvrat_res = json_decode(curl_exec($seans), true);
 		curl_close($seans);
+		
 		try{
 			$imgUploaded = $vk->photos()->saveMarketPhoto(
 				$access_token,
@@ -71,7 +73,10 @@ if($_GET['code']){
 					'crop_data' => $vozvrat_res['crop_data'],
 					'crop_hash' => $vozvrat_res['crop_hash']
 				)
-			);			
+			);	
+			// echo "<pre>";
+			// print_r($imgUploaded);
+			// echo "</pre>";
 		} catch (Exception $e) {
 			echo 'Error save photo: ' . $e->getMessage() . "<br>";
 		}				
@@ -83,13 +88,12 @@ if($_GET['code']){
 		$vk->market()->add(
 			$access_token,
 			array(
-				'owner_id' => 198706665,
+				'owner_id' => -198706665,
 				'name' => 'test',
 				'category_id' => '1',
 				'description' => 'description',
 				'price' => 120.00,
-				'main_photo_id' => 345,
-				'photo_ids' => 345,
+				'main_photo_id' => $imgUploaded[0]['id'],
 				'url' => 345,
 				'url' => 'test.local',
 

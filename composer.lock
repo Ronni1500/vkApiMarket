@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0d4e78cbab9f917cf8049dc6da0e00e",
+    "content-hash": "f29c9341dddb9de1930a3b26611ee37e",
     "packages": [
+        {
+            "name": "asil/vkmarket",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silischev/vkmarket.git",
+                "reference": "d58629435815ee75a5a62bda691d9d03828d8112"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silischev/vkmarket/zipball/d58629435815ee75a5a62bda691d9d03828d8112",
+                "reference": "d58629435815ee75a5a62bda691d9d03828d8112",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Asil\\VkMarket\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Silischev"
+                }
+            ],
+            "description": "The PHP library for work with VK Market API",
+            "keywords": [
+                "api",
+                "market",
+                "vk",
+                "vk.com"
+            ],
+            "time": "2017-07-17T13:38:55+00:00"
+        },
         {
             "name": "vkcom/vk-php-sdk",
             "version": "5.101.0",
